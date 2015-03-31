@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="beans" auto-import="false">
+  <class name="beans.School" table="School">
+    <id name="name" column="name" type="java.lang.String">
+        <generator class="native" />
+    </id>
+    <property name="type" column="Type" type="java.lang.String"/>
+    <property name="size" column="Size" type="java.lang.String"/>
+    <property name="location" column="Location" type="java.lang.String"/>
+    <property name="setting" column="Setting" type="java.lang.String"/>
+    <property name="tuitionFee" column="Tuition_Fee" type="java.lang.String"/>
+    <property name="roomBoard" column="Room_Board" type="java.lang.String"/>
+    <property name="appDeadLine" column="Application_Deadline" type="java.lang.String"/>
+    <property name="appFee" column="Application_Fee" type="java.lang.String"/>
+    <property name="toefl" column="Toefl" type="java.lang.String"/>
+    <property name="sat1Min" column="SAT_1_25_percent" type="java.lang.String"/>
+    <property name="sat1Up" column="SAT_1_75_percent" type="java.lang.String"/>
+    <property name="sat2" column="sat_2" type="java.lang.String"/>
+    <property name="acceptRate" column="Accept_Rate" type="java.lang.String"/>
+    <property name="rank" column="Rank_Overall" type="java.lang.String"/>
+    <property name="selectivityRank" column="Selectivity" type="java.lang.String"/>
+    <property name="reputationScore" column="Reputation_Score" type="java.lang.String"/>
+    <property name="aid" column="Int_Finacial_Aid" type="java.lang.String"/>
+    <property name="calendar" column="Calendar" type="java.lang.String"/>
+    <property name="website" column="Website" type="java.lang.String"/>
+    <property name="category" column="Category" type="java.lang.String"/>
+    <!-- <property name="recomLetter" column="RLetter" type="java.lang.String"/>
+    <property name="foriegnPercent" column="ForiegnPercent" type="java.lang.String"/>
+    <property name="asianPercent" column="AsianPercent" type="java.lang.String"/>-->
+  
+  </class>
+</hibernate-mapping>  

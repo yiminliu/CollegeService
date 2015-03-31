@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE validators PUBLIC "-//OpenSymphony Group//XWork Validator 1.0.2//EN" 
+  		"http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
+<validators>
+	<field name="toefl">
+		<field-validator type="int" short-circuit="true">
+			<param name="min">0</param>
+			<param name="max">120</param>
+			<message>TOEFL 成绩应在 ${min} 和 ${max}之间, 你的输入 ${toefl}无效.</message>
+		</field-validator>
+	</field>
+	<field name="sat">
+		<field-validator type="int" short-circuit="true">
+			<param name="min">0</param>
+			<param name="max">2400</param>
+			<message>SAT-I 成绩应在 ${min} 和 ${max}之间, 你的输入 ${stl}无效..</message>
+		</field-validator>
+	</field>
+</validators>
+      

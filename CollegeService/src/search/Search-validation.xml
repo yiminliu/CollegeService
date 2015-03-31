@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE validators PUBLIC "-//OpenSymphony Group//XWork Validator 1.0.2//EN" 
+  		"http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
+<validators>
+	<field name="toefl">
+		<field-validator type="int" short-circuit="true">
+			<param name="min">0</param>
+			<param name="max">120</param>
+			<message>TOEFL score must be between ${min} and ${max}, current
+				value
+				is ${toefl}.</message>
+		</field-validator>
+	</field>
+	<field name="sat1">
+		<field-validator type="int" short-circuit="true">
+			<param name="min">0</param>
+			<param name="max">2400</param>
+			<message>SAT score must be between ${min} and ${max}, current
+				value is
+				${sat1}.</message>
+		</field-validator>
+	</field>
+</validators>
