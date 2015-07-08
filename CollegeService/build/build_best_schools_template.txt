@@ -1,0 +1,15 @@
+DROP TABLE IF EXISTS BestAccounting;
+CREATE TABLE BestAccounting
+(
+  Name VARCHAR(100) NOT NULL,
+  Rank INT,
+  INDEX IdIndex(Name)
+);
+
+Insert BestAccounting values('Princeton University', 1);
+Insert BestAccounting values('Harvard University', 2);
+Insert BestAccounting values('Yale University', 3);
+Insert BestAccounting values('Stanford University', 5);
+Insert BestAccounting values('University of Pennsylvania', 4);
+Insert BestAccounting values('California Institute of Technology', 6);
+Insert BestAccounting values('Michigan Technological University', 9);

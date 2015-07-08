@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<project name="CollegeService" default="deploy" basedir=".">
+	<property name="warfile" value="CollegeService" />
+	<property name="build.home" value="./" />
+	<property name="src" value="../Java Resources/src" />
+	<property name="lib" value="../Java Resources/Libraries" />
+	<property name="classes" value="../WebContent/WEB-INF/classes" />
+	<target name="unpack">
+		<unwar src="${warfile}.war" dest="${warfile}" />
+	</target>
+	<target name="build-class">
+
+		<javac destdir="WEB-INF/classes">
+			<src path="src" />
+		</javac>
+		<fileset dir="WebContent" includes="**/classes/*.class">
+			<exclude name="WEB-INF/web.xml" />
+		</fileset>
+	</target>
+	<target name="build-jar">
+		<war destfile="${warfile}.war" webxml="WebContent/WEB-INF/web.xml"
+			update="true">
+			<fileset dir="WebContent" includes="**/classes/*.class">
+				<exclude name="WEB-INF/web.xml" />
+			</fileset>
+		</war>
+	</target>
+	<target name="build">
+		<antcall target="build-class" />
+		<antcall target="build-jar" />
+	</target>
+	<target name="copy">
+		<copy todir="c:\program files\apache software foundation\tomcat 6.0\webapps"
+			overwrite="true">
+			<fileset dir=".">
+				<include name="*.war" />
+			</fileset>
+		</copy>
+	</target>
+	<target name="deploy">
+		<antcall target="build" />
+		<antcall target="copy" />
+	</target>
+</project>

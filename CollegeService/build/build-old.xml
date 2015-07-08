@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<project name="collegeSearch" default="dist" basedir=".">
+	<!-- =================================================================== -->
+	<description>
+		Build file for collegeSearch
+		Build Instructions:
+		To build, run
+		ant "target"
+		on the directory where this file is located with the target you want.
+
+		Supported thecollective targets:
+
+		- compile : compile the thecollective package and create a jar file on
+		${build.dir}.
+
+</description>
+
+	<!-- ============================================================== -->
+	<!-- collegeSearch Project build file -->
+	<!-- ============================================================== -->
+
+
+	<!-- =============================================================== -->
+	<!-- setProps -->
+	<!-- =============================================================== -->
+
+	<target name="setProps" unless="noSetProps" description="setup the properties">
+		<echo message="setting up the properties......" />
+		<property file="collegeSearch-build.properties" />
+	</target>
+
+
+	<!-- =============================================================== -->
+	<!-- collegeSearch.init -->
+	<!-- =============================================================== -->
+
+	<target name="collegeSearch.init" depends="setProps" if="build.home">
+		<echo message="------ target collegeSearch.init -------" />
+		<tstamp>
+			<format property="formatted.time" pattern="yyyy-MM-dd HH:mm:ss zzz" />
+		</tstamp>
+		<property name="basedir" value="../" />
+		<property name="build.home" value="./" />
+		<property name="src" value="${basedir}/../Java Resources/src" />
+		<property name="lib" value="${basedir}/../Java Resources/Libraries" />
+		<property name="jar" value="${build.home}/jar" />
+		<property name="classes" value="${build.home}/classes" />
+
+		<path id="classpath">
+			<fileset dir="${lib}">
+				<include name="**/*.jar" />
+				<include name="**/*.zip" />
+			</fileset>
+			<fileset dir="${basedir}/../kronos/build/jar">
+				<include name="**/*.jar" />
+			</fileset>
+			<fileset dir="${basedir}/../emrb/bin">
+				<include name="emrb.jar" />
+			</fileset>
+			<pathelement location="${classes}" />
+		</path>
+
+	</target>
+	<!-- =============================================================== -->
+	<!-- cleanup -->
+	<!-- =============================================================== -->
+	<target name="collegeSearch.cleanup" depends="collegeSearch.init">
+		<echo message="------ target collegeSearch.cleanup -------" />
+		<echo>Build started: ${formatted.time}</echo>
+		<delete dir="${classes}" /> <!-- be careful that build.home is defined correctly! -->
+		<mkdir dir="${classes}" />
+		<mkdir dir="${jar}" />
+	</target>
+
+
+	<!-- =============================================================== -->
+	<!-- compile -->
+	<!-- =============================================================== -->
+
+	<target name="collegeSearch.compile" depends="collegeSearch.cleanup">
+		<javac destdir="${classes}" debug="on">
+			<src path="${src}" />
+			<include
+				name="net/earthlink/is/registration/XMLCollective/CommandProcessor/XML_log_data/*.java" />
+			<include
+				name="net/earthlink/is/registration/XMLCollective/CommandProcessor/XML_create_new_session/*.java" />
+			<include
+				name="net/earthlink/is/registration/XMLCollective/CommandProcessor/XML_get_pop_list/PopDB/*.java" />
+			<include
+				name="net/earthlink/is/registration/XMLCollective/CommandProcessor/XML_get_pop_list/*.java" />
+			<include
+				name="net/earthlink/is/registration/XMLCollective/CommandProcessor/XML_get_pop_messages/*.java" />
+			<include
+				name="net/earthlink/is/registration/XMLCollective/CommandProcessor/XML_get_update_pop/*.java" />
+			<include
+				name="net/earthlink/is/registration/XMLCollective/CommandProcessor/XML_ping/*.java" />
+			<include
+				name="net/earthlink/is/registration/XMLCollective/CommandProcessor/XML_validate/*.java" />
+			<include
+				name="net/earthlink/is/registration/WebCollective/lib/utilities/XMLHelper.java" />
+			<classpath refid="classpath" />
+		</javac>
+	</target>
+
+	<!-- =============================================================== -->
+	<!-- make jar -->
+	<!-- =============================================================== -->
+
+	<target name="make.jar" depends="collegeSearch.compile">
+		<jar jarfile="${jar}/collegeSearch.jar" basedir="${classes}"
+			includes="${jifiles}">
+			<manifest>
+				<attribute name="Built-By" value="${user.name}" />
+			</manifest>
+		</jar>
+	</target>
+
+
+	<!-- ========================================================== -->
+	<!-- dist -->
+	<!-- ========================================================== -->
+	<target name="dist" depends="make.jar">
+		<echo message="------ target dist -------" />
+	</target>
+</project>

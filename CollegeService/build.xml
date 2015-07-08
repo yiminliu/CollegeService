@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<project name="CollegeSearch" default="deploy" basedir=".">
+	<property name="warfile" value="CollegeService" />
+	<property name="build.home" value="./" />
+	<property name="src.dir" value="../src" />
+	<property name="lib.dir" value="../Java Resources/Libraries" />
+	<property name="classes.dir" value="../WebContent/WEB-INF/classes" />
+	<property name="web.dir" value="../WebContent" />
+	<path id="master-classpath">
+	        <fileset dir="${web.dir}/WEB-INF/lib">
+	            <include name="*.jar"/>
+	        </fileset>
+	        <!-- We need the servlet API classes: -->
+	        <!--  * for Tomcat 5/6 use servlet-api.jar -->
+	        <!--  * for other app servers - check the docs -->
+	        <!--<fileset dir="${appserver.lib}">
+	            <include name="servlet*.jar"/>
+	        </fileset>
+	        <pathelement path="${build.dir}"/>-->
+	</path>
+	<target name="unpack">
+		<unwar src="${warfile}.war" dest="${warfile}" />
+	</target>
+	<target name="compile" description="Compile main source tree java files">
+	   <mkdir dir="${classes.dir}"/>
+		<echo message="creating class dir" />
+		<echo message="${classes.dir}" />
+	        <javac destdir="${classes.dir}" source="1.5" target="1.5" debug="true">
+	            <src path="${src.dir}"/>
+	            <classpath refid="master-classpath"/>
+	        </javac>
+	</target>
+	<target name="build">
+		<echo message="HELLO from CollegeService build" />
+		<war destfile="${warfile}.war" basedir="WebContent"
+			webxml="WebContent/WEB-INF/web.xml" update="true">
+			<fileset dir="WebContent">
+				<exclude name="WEB-INF/web.xml" />
+			</fileset>
+		</war>
+	</target>
+	<target name="copy">
+		<copy todir="c:\program files\apache software foundation\tomcat 7.0\webapps"
+			overwrite="true">
+			<fileset dir=".">
+				<include name="*.war" />
+			</fileset>
+		</copy>
+	</target>
+	<target name="deploy">
+		<echo message="HELLO from echo" />
+		<antcall target="compile" />
+		<antcall target="build" />
+		<antcall target="copy" />
+	</target>
+</project>
